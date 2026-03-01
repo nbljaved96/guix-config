@@ -1,3 +1,5 @@
+#+startup: overview
+
 Your current profile and other stuff (like channels.scm) is in ~/.config/guix/
 
 #+CAPTION: To update this repository by fetching the config files from appropriate locations

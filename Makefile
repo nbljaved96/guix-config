@@ -54,11 +54,18 @@ echo:
 distrobox: build-arch-image run-arch-image-w-distrobox
 
 build-arch-image:
-	podman build -t localhost/arch ./.config/distrobox
+	podman build --pull=newer -t localhost/arch ./.config/distrobox
 
 run-arch-image-w-distrobox:
+	# delete 'arch' image
+	distrobox rm arch
+	# rebuild 'arch' image
 	distrobox create \
           --volume /gnu:/gnu/ \
           --volume /var/guix:/var/guix \
+          --volume /run/current-system:/run/current-system \
+          --volume /nix:/nix \
           --image localhost/arch \
           --name arch
+	# run the container
+	distrobox enter arch -- ls

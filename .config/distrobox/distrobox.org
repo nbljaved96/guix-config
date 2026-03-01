@@ -2,7 +2,7 @@
 #+caption: Build the image
 #+begin_src sh
 podman build -t localhost/arch .
-# podman build --no-cache -t localhost/arch .
+# podman build --pull --no-cache -t localhost/arch .
 #+end_src
 
 We mount some Guix specific volumes for Guix integration
@@ -12,6 +12,7 @@ We mount some Guix specific volumes for Guix integration
 distrobox create \
           --volume /gnu:/gnu/ \
           --volume /var/guix:/var/guix \
+          --volume /nix:/nix \
           --image localhost/arch \
           --name arch
 #+end_src

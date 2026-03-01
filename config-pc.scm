@@ -200,9 +200,12 @@
                             (elogind-configuration
                              (inherit config)
                              (handle-power-key 'suspend)))
+                           ;; See https://gitlab.com/nonguix/nonguix Substitutes for nonguix
                            ;; enable substitute for nonguix - should help with large package eg: linux, firefox
                            (guix-service-type config => (guix-configuration
                                                          (inherit config)
+                                                         ;; run guix-daemon without root privileges
+                                                         (privileged? #f)
                                                          (substitute-urls
                                                           (append
                                                            (list

@@ -6,11 +6,15 @@
 { pkgs ? import <nixos-unstable> {} }:
 
 [
+  pkgs.backrest
   pkgs.bun
   pkgs.devenv
   pkgs.gh
   pkgs.hello
   pkgs.kitty
+  pkgs.opencode
+  pkgs.rclone
+  pkgs.restic
   pkgs.tinymist
   pkgs.uv
 ]
