@@ -1,0 +1,13 @@
+# Editor / OS junk
+*~
+\#*\#
+.\#*
+*.swp
+.DS_Store
+
+# Stray screenshots/images dropped into config dirs
+.config/distrobox/*.png
+
+# Guix/Nix build artifacts
+/result
+/result-*

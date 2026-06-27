@@ -1,4 +1,4 @@
-#!/usr/bin/env -S sh
+#!/usr/bin/env bash
 
 ## Example usage
 # ./fix-foreign-binary.sh path-to-problematic-executable
@@ -8,17 +8,17 @@
 #
 
 if ! command -v gum &>/dev/null; then
-  echo "Install gum using `go install github.com/charmbracelet/gum@latest`" >&2
+  echo 'Install gum using `go install github.com/charmbracelet/gum@latest`' >&2
   exit 1
 fi
 
 if ! command -v patchelf &>/dev/null; then
-  gum log --structured --level error "Install patchelf with `guix install patchelf`"
+  gum log --structured --level error 'Install patchelf with `guix install patchelf`'
   exit 1
 fi
 
 if ! command -v file &>/dev/null; then
-  gum log --structured --level error "Install patchelf with `guix install file`"
+  gum log --structured --level error 'Install file with `guix install file`'
   exit 1
 fi
 

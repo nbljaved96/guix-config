@@ -8,13 +8,16 @@
 [
   pkgs.backrest
   pkgs.bun
+  pkgs.claude-code
   pkgs.devenv
   pkgs.gh
   pkgs.hello
   pkgs.kitty
   pkgs.opencode
+  pkgs.pnpm
   pkgs.rclone
   pkgs.restic
+  pkgs.scrcpy
   pkgs.tinymist
   pkgs.uv
 ]

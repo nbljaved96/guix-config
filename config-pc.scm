@@ -9,7 +9,7 @@
 
 ;; Indicate which modules to import to access the variables
 ;; used in this configuration.
-(use-modules 
+(use-modules
  (gnu)
  (gnu packages package-management)
  (gnu packages bash)
@@ -28,7 +28,9 @@
  (nongnu system linux-initrd)
  (srfi srfi-1)
  (guix inferior)
- (guix channels))
+ (guix channels)
+ (nbl packages tailscale)
+ (nbl services tailscale))
 
 (use-package-modules
  curl
@@ -115,6 +117,8 @@
  ;; under their own account: use 'guix search KEYWORD' to search
  ;; for packages and 'guix install PACKAGE' to install a package.
  (packages (append (list curl
+                         tailscale
+
                          ;; docker
                          ;; docker-cli
                          ;; docker-compose
@@ -151,7 +155,9 @@
  ;; Below is the list of system services.  To search for available
  ;; services, run 'guix system search KEYWORD' in a terminal.
  (services
-  (append (list (service xfce-desktop-service-type)
+  (append (list (service tailscaled-service-type)
+                (service xfce-desktop-service-type)
+
                 ;; To configure OpenSSH, pass an 'openssh-configuration'
                 ;; record as a second argument to 'service' below.
                 (service openssh-service-type

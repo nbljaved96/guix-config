@@ -14,6 +14,23 @@ ln -sf ~/guix-config/channels.scm ~/.config/guix/channels.scm
 
 #+end_src
 
+** Reproducibility: pinned channels
+=channels.scm= floats to each channel's HEAD on =guix pull=, so it alone
+cannot reproduce a profile. =channels-lock.scm= captures the exact channel
+commits currently in use (=guix describe -f channels=). Together with the
+package manifest this pins an exact environment.
+
+#+CAPTION: Refresh the lock after a `guix pull` you want to keep
+#+begin_src shell
+guix describe -f channels > ~/guix-config/channels-lock.scm
+#+end_src
+
+#+CAPTION: Reproduce that exact environment elsewhere
+#+begin_src shell
+guix time-machine -C ~/guix-config/channels-lock.scm -- \
+     package -m ~/guix-config/current-profile-manifest -L ~/guix-config/modules
+#+end_src
+
 * ./scripts
 ./scripts/ is a folder that contains, you guessed it, useful scripts :)
 
@@ -24,10 +41,15 @@ ln -sf ~/guix-config/channels.scm ~/.config/guix/channels.scm
 * Guix as your OS
 
 #+CAPTION: To reconfigure the system with my custom packages
+The config imports custom modules under =(nbl ...)= (e.g. =(nbl packages
+tailscale)=). Those live in =modules/nbl/=, so the load path must point at
+=modules/= via =-L= (its parent). Without it, the reconfigure fails to
+resolve those modules. Note: point =-L= at =modules/=, NOT the repo root —
+the root holds loose non-module files (=channels.scm=, =config-*.scm=) that
+guix would try (and fail) to load as modules.
 #+begin_src sh
 
-# sudo guix system reconfigure -L ~/guix-config/nbl /etc/config.scm
-sudo guix system reconfigure /etc/config.scm
+sudo guix system reconfigure -L ~/guix-config/modules /etc/config.scm
 
 #+end_src
 

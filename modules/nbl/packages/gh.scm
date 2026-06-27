@@ -1,4 +1,4 @@
-(define-module (packages gh)
+(define-module (nbl packages gh)
   #:use-module (guix packages)
   #:use-module (guix gexp)
   #:use-module (guix build-system copy)
